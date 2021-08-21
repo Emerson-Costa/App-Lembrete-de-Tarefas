@@ -15,11 +15,11 @@
         android:id="@+id/tollbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Criar Tarefa"
+        app:title="@string/label_new_task"
         app:navigationIcon="@drawable/ic_navigate"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <!--    Criando uma linha guia para deixar um espaçamento hoeizontal de inicio  -->
+    <!--    Criando uma linha guia para deixar um espaçamento horizontal de inicio  -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_Start"
         android:orientation="vertical"
@@ -55,7 +55,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/til_date"
+        android:id="@+id/til_date"
         android:layout_width="0dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Data"
