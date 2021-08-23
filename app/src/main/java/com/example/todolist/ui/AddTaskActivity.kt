@@ -3,9 +3,13 @@ package com.example.todolist.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todolist.databinding.AcitivityAddTaskBinding
+import com.example.todolist.datasource.TaskDataSource
 import com.example.todolist.extensions.format
 import com.example.todolist.extensions.text
+import com.example.todolist.model.Task
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import java.util.*
 
 
@@ -32,6 +36,41 @@ class AddTaskActivity : AppCompatActivity() {
             }
             datePicker.show(supportFragmentManager, "DATE_PICKER_TAG")
         }
+
+        binding.tilHour.editText?.setOnClickListener {
+            val timerPicker = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .build()
+            timerPicker.addOnPositiveButtonClickListener {
+
+                val minute = if (timerPicker.minute in 0..9) "0${timerPicker.minute}" else timerPicker.minute
+
+                val hour: String
+                if (timerPicker.hour in 0..9) {
+                    hour = "0${timerPicker.hour}"
+                } else {
+                    hour = timerPicker.hour.toString()
+                }
+
+                binding.tilHour.text = "$hour:$minute"
+            }
+            timerPicker.show(supportFragmentManager, null)
+        }
+
+        binding.btnCancel.setOnClickListener{
+            finish()
+        }
+
+        binding.btnNewTask.setOnClickListener {
+            val task = Task(
+                title = binding.tilTitle.text ,
+                date  = binding.tilDate.text,
+                hour  = binding.tilHour.text
+            )
+            TaskDataSource.insertTask(task)
+        }
+
+
     }
 
 

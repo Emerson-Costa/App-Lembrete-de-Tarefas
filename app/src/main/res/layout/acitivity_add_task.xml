@@ -96,6 +96,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancel"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:text="Cancelar"
         android:textAllCaps="false"
