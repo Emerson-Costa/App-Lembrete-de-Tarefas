@@ -1,9 +1,11 @@
 package com.example.todolist.ui
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.todolist.databinding.ActivityMainBinding
 import com.example.todolist.datasource.TaskDataSource
 
@@ -24,7 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvTasks.adapter = adapter
 
+        updateList()
         insertListeners()
+
     }
 
     private fun insertListeners() {
@@ -33,20 +37,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         adapter.listenerEdit = {
-            Log.e("TAG", "listerner: $it")
+            val intent = Intent(this,AddTaskActivity::class.java)
+            intent.putExtra(AddTaskActivity.TASK_ID, it.id)
+            startActivityForResult(intent, CREATE_NEW_TASK)
         }
 
         adapter.listenerDelete = {
-            Log.e("TAG", "listerner: $it")
+            TaskDataSource.deleteTask(it)
+            updateList()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == CREATE_NEW_TASK){
-            binding.rvTasks.adapter = adapter
-            adapter.submitList(TaskDataSource.getList())
+        if(requestCode == CREATE_NEW_TASK && resultCode == Activity.RESULT_OK) updateList()
+
+    }
+
+    private fun updateList() {
+        val list = TaskDataSource.getList()
+        if (list.isEmpty()) {
+            binding.includeEmpty.emptyState.visibility = View.VISIBLE
+        }else{
+            binding.includeEmpty.emptyState.visibility = View.GONE
+            binding.rvTasks.visibility = View.VISIBLE
         }
+
+        adapter.submitList(list)
     }
 
     companion object{

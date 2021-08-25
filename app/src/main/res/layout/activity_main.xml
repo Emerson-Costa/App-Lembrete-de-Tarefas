@@ -17,6 +17,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <include
+        android:id="@+id/include_empty"
+        layout="@layout/empty_state"/>
+
     <!--
         recycleView serve para listar elementos na activity
 
@@ -27,6 +31,7 @@
        -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tasks"
+        android:visibility="gone"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/fab"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
