@@ -4,4 +4,4 @@ Aplicação para criar lembretes de tarefas desenvolvida com o Android Studio co
 da plataforma da Digital Innovation One.
 
 * Perfil na plataforma DIO: https://web.digitalinnovation.one/users/emerson_costa2785?tab=achievements
-* Likendim: https://www.linkedin.com/in/emerson-costa-199995169/
+* Linkendim: https://www.linkedin.com/in/emerson-costa-199995169/
